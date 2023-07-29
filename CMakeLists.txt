@@ -39,7 +39,7 @@ if(CMAKE_CXX_COMPILER_ID MATCHES GNU)
 endif()
 
 ## Change ON <-> OFF for testing
-option(BUILD_TESTS "Build tests" ON)
+option(BUILD_TESTS "Build tests" OFF)
 
 if(BUILD_TESTS)
     include(FetchContent)
