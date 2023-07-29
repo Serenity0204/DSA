@@ -1,9 +1,9 @@
-#ifndef LINKED_LIST_FUNCTIONS_H
-#define LINKED_LIST_FUNCTIONS_H
+#ifndef SLL_FUNCTIONS_H
+#define SLL_FUNCTIONS_H
 
 #include <cassert>
 
-#include "node.h"
+#include "sll_node.h"
 
 // Declaration
 // Linked List General Functions:
@@ -250,4 +250,4 @@ node<T>* _last_node(node<T>* head)
     return _last_node<T>(head->_next);
 }
 
-#endif // LINKED_LIST_FUNCTIONS_H
+#endif // SLL_FUNCTIONS_H

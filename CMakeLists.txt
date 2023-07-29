@@ -39,7 +39,7 @@ if(CMAKE_CXX_COMPILER_ID MATCHES GNU)
 endif()
 
 ## Change ON <-> OFF for testing
-option(BUILD_TESTS "Build tests" OFF)
+option(BUILD_TESTS "Build tests" ON)
 
 if(BUILD_TESTS)
     include(FetchContent)
@@ -64,6 +64,10 @@ if(BUILD_TESTS)
         _tests/_test_files/sll_test.cpp
         ${SOURCE_FILES}
     )
+    ADD_EXECUTABLE(stackandqueue_test
+        _tests/_test_files/stackandqueue_test.cpp
+        ${SOURCE_FILES}
+    )
     ADD_EXECUTABLE(main
         main.cpp
         ${SOURCE_FILES}
@@ -71,6 +75,7 @@ if(BUILD_TESTS)
     TARGET_LINK_LIBRARIES(main gtest)
     TARGET_LINK_LIBRARIES(vector_test gtest)
     TARGET_LINK_LIBRARIES(sll_test gtest)
+    TARGET_LINK_LIBRARIES(stackandqueue_test gtest)
 endif()
 
 set(CMAKE_CXX_STANDARD 14)

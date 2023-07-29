@@ -1,5 +1,5 @@
-#ifndef NODE_H
-#define NODE_H
+#ifndef SLL_NODE_H
+#define SLL_NODE_H
 
 #include <iostream>
 
@@ -31,4 +31,4 @@ std::ostream& operator<<(std::ostream& outs, const node<U>& printMe)
     outs << "[" << printMe._item << "]";
     return outs;
 }
-#endif // NODE_H
+#endif // SLL_NODE_H

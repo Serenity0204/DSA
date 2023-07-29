@@ -1,7 +1,7 @@
-#ifndef LIST_ITERATED_H
-#define LIST_ITERATED_H
+#ifndef SLL_H
+#define SLL_H
 
-#include "linked_list_functions.h"
+#include "sll_functions.h"
 #include <cassert>
 #include <iostream>
 
