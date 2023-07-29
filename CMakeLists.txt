@@ -1,13 +1,23 @@
 cmake_minimum_required(VERSION 3.14) # Because we are using FetchContent which is available in 3.14+
-project(DataStructures)
+project(DSA)
 
-# Globbing source files
-file(GLOB_RECURSE SOURCES "includes/**/*.cpp")
+# # Globbing source files
+# file(GLOB_RECURSE SOURCES "includes/**/*.cpp")
 
-add_library(DataStructures ${SOURCES})
+# add_library(DSA ${SOURCES})
+
+# # Specify include directories
+# target_include_directories(DSA PUBLIC 
+#     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/includes>
+#     $<INSTALL_INTERFACE:include>  # <prefix>/include
+# )
+
+
+# Adding interface library (header-only)
+add_library(DSA INTERFACE)
 
 # Specify include directories
-target_include_directories(DataStructures PUBLIC 
+target_include_directories(DSA INTERFACE 
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/includes>
     $<INSTALL_INTERFACE:include>  # <prefix>/include
 )
@@ -46,19 +56,28 @@ if(BUILD_TESTS)
     set(INCLUDES_FOLDER includes)
     FILE(GLOB_RECURSE SOURCE_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${INCLUDES_FOLDER}/*.cpp")
 
-    
+    ADD_EXECUTABLE(vector_test
+        _tests/_test_files/vector_test.cpp
+        ${SOURCE_FILES}
+    )
+    ADD_EXECUTABLE(sll_test
+        _tests/_test_files/sll_test.cpp
+        ${SOURCE_FILES}
+    )
     ADD_EXECUTABLE(main
         main.cpp
         ${SOURCE_FILES}
     )
     TARGET_LINK_LIBRARIES(main gtest)
+    TARGET_LINK_LIBRARIES(vector_test gtest)
+    TARGET_LINK_LIBRARIES(sll_test gtest)
 endif()
 
 set(CMAKE_CXX_STANDARD 14)
 
 # Install library target
-install(TARGETS DataStructures
-    EXPORT DataStructuresTargets
+install(TARGETS DSA
+    EXPORT DSATargets
     LIBRARY DESTINATION lib
     ARCHIVE DESTINATION lib
     RUNTIME DESTINATION bin
@@ -67,14 +86,14 @@ install(TARGETS DataStructures
 
 # This makes project importable from the install directory
 # Put config file into the CMake user package registry
-install(EXPORT DataStructuresTargets
-    FILE DataStructuresTargets.cmake
-    NAMESPACE DataStructures::
-    DESTINATION lib/cmake/DataStructures
+install(EXPORT DSATargets
+    FILE DSATargets.cmake
+    NAMESPACE DSA::
+    DESTINATION lib/cmake/DSA
 )
 
 # This makes project importable from the build directory
-export(TARGETS DataStructures
-    NAMESPACE DataStructures::
-    FILE ${CMAKE_CURRENT_BINARY_DIR}/DataStructures.cmake
+export(TARGETS DSA
+    NAMESPACE DSA::
+    FILE ${CMAKE_CURRENT_BINARY_DIR}/DSA.cmake
 )
