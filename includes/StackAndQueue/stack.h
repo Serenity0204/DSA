@@ -22,7 +22,7 @@ namespace DSA
                 this->_ptr = nullptr;
             }
             // Point Iterator to where p is pointing to
-            Iterator(node<T>* p)
+            Iterator(DLLUtils::node<T>* p)
             {
                 this->_ptr = p;
             }
@@ -77,7 +77,7 @@ namespace DSA
             }
 
         private:
-            node<T>* _ptr; // pointer being encapsulated
+            DLLUtils::node<T>* _ptr; // pointer being encapsulated
         };
 
         // constructor: CTOR
@@ -110,7 +110,7 @@ namespace DSA
         friend std::ostream& operator<<(std::ostream& outs, const Stack<U>& printMe);
 
     private:
-        node<T>* _top;
+        DLLUtils::node<T>* _top;
         int _size;
     };
 
@@ -128,22 +128,22 @@ namespace DSA
     template <typename T>
     Stack<T>::Stack(const Stack<T>& copyMe)
     {
-        this->_top = _copy_list<T>(copyMe._top);
+        this->_top = DLLUtils::_copy_list<T>(copyMe._top);
         this->_size = copyMe.size();
     }
 
     template <typename T>
     Stack<T>::~Stack()
     {
-        _clear_list<T>(this->_top);
+        DLLUtils::_clear_list<T>(this->_top);
         this->_size = 0;
     }
     template <typename T>
     Stack<T>& Stack<T>::operator=(const Stack<T>& RHS)
     {
         if (this == &RHS) return *this;
-        _clear_list<T>(this->_top);
-        this->_top = _copy_list<T>(RHS._top);
+        DLLUtils::_clear_list<T>(this->_top);
+        this->_top = DLLUtils::_copy_list<T>(RHS._top);
         this->_size = RHS._size;
         return *this;
     }
@@ -151,7 +151,7 @@ namespace DSA
     template <typename T>
     void Stack<T>::push(T item)
     {
-        this->_top = _insert_head<T>(this->_top, item);
+        this->_top = DLLUtils::_insert_head<T>(this->_top, item);
         this->_size++;
     }
 
@@ -159,7 +159,7 @@ namespace DSA
     T Stack<T>::pop()
     {
         if (this->_size > 0) this->_size--;
-        return _delete_node<T>(this->_top, this->_top);
+        return DLLUtils::_delete_node<T>(this->_top, this->_top);
     }
 
     template <typename T>

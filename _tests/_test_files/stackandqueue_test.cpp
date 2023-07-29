@@ -17,15 +17,15 @@ using namespace std;
 
 bool test_linked_list_functions(bool debug = false)
 {
-    node<int>* head = nullptr;
+    DLLUtils::node<int>* head = nullptr;
     for (int i = 0; i < 5; i++)
     {
-        _insert_head(head, (i + 1) * 10);
+        DLLUtils::_insert_head(head, (i + 1) * 10);
     }
-    _print_list(head);
+    DLLUtils::_print_list(head);
 
-    node<int>* inserted;
-    node<int>* this_node;
+    DLLUtils::node<int>* inserted;
+    DLLUtils::node<int>* this_node;
     int n;
 
     cout << "\n=================== testing insert ===================" << endl;

@@ -23,7 +23,7 @@ namespace DSA
                 this->_ptr = nullptr;
             }
             // Point Iterator to where p is pointing to
-            Iterator(node<T>* p)
+            Iterator(DLLUtils::node<T>* p)
             {
                 this->_ptr = p;
             }
@@ -78,7 +78,7 @@ namespace DSA
             }
 
         private:
-            node<T>* _ptr; // pointer being encapsulated
+            DLLUtils::node<T>* _ptr; // pointer being encapsulated
         };
 
         // constructor: CTOR
@@ -112,8 +112,8 @@ namespace DSA
         friend std::ostream& operator<<(std::ostream& outs, const Queue<U>& printMe);
 
     private:
-        node<T>* _front;
-        node<T>* _rear;
+        DLLUtils::node<T>* _front;
+        DLLUtils::node<T>* _rear;
         int _size;
     };
 
@@ -134,14 +134,14 @@ namespace DSA
     {
         this->_front = nullptr;
         this->_rear = nullptr;
-        this->_rear = _copy_list<T>(this->_front, copyMe._front);
+        this->_rear = DLLUtils::_copy_list<T>(this->_front, copyMe._front);
         this->_size = copyMe.size();
     }
 
     template <typename T>
     Queue<T>::~Queue()
     {
-        _clear_list<T>(this->_front);
+        DLLUtils::_clear_list<T>(this->_front);
         this->_front = nullptr;
         this->_rear = nullptr;
         this->_size = 0;
@@ -151,10 +151,10 @@ namespace DSA
     Queue<T>& Queue<T>::operator=(const Queue<T>& RHS)
     {
         if (this == &RHS) return *this;
-        _clear_list<T>(this->_front);
+        DLLUtils::_clear_list<T>(this->_front);
         this->_front = nullptr;
         this->_rear = nullptr;
-        this->_rear = _copy_list<T>(this->_front, RHS._front);
+        this->_rear = DLLUtils::_copy_list<T>(this->_front, RHS._front);
         this->_size = RHS._size;
         return *this;
     }
@@ -169,14 +169,14 @@ namespace DSA
             this->_rear = this->_front;
             return;
         }
-        this->_rear = _insert_after<T>(this->_front, _last_node<T>(this->_front), item);
+        this->_rear = DLLUtils::_insert_after<T>(this->_front, DLLUtils::_last_node<T>(this->_front), item);
     }
 
     template <typename T>
     T Queue<T>::pop()
     {
         if (this->_size > 0) this->_size--;
-        return _delete_node<T>(this->_front, this->_front);
+        return DLLUtils::_delete_node<T>(this->_front, this->_front);
     }
 
     template <typename T>

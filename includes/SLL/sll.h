@@ -23,7 +23,7 @@ namespace DSA
                 this->_ptr = nullptr;
             }
             // Point Iterator to where p is pointing to
-            Iterator(node<T>* p)
+            Iterator(SLLUtils::node<T>* p)
             {
                 this->_ptr = p;
             }
@@ -79,7 +79,7 @@ namespace DSA
             }
 
         private:
-            node<T>* _ptr; // pointer being encapsulated
+            SLLUtils::node<T>* _ptr; // pointer being encapsulated
         };
 
         // constructor: CTOR
@@ -116,7 +116,7 @@ namespace DSA
         friend std::ostream& operator<<(std::ostream& outs, const SLL<U>& l);
 
     private:
-        node<T>* _head;
+        SLLUtils::node<T>* _head;
         int _size;
     };
 
@@ -133,14 +133,14 @@ namespace DSA
     template <typename T>
     SLL<T>::SLL(const SLL<T>& copyThis)
     {
-        this->_head = _copy_list<T>(copyThis._head);
+        this->_head = SLLUtils::_copy_list<T>(copyThis._head);
         this->_size = copyThis._size;
     }
 
     template <typename T>
     SLL<T>::~SLL()
     {
-        _clear_list<T>(this->_head);
+        SLLUtils::_clear_list<T>(this->_head);
         this->_size = 0;
     }
 
@@ -148,8 +148,8 @@ namespace DSA
     SLL<T>& SLL<T>::operator=(const SLL<T>& RHS)
     {
         if (this == &RHS) return *this;
-        _clear_list<T>(this->_head);
-        this->_head = _copy_list<T>(RHS._head);
+        SLLUtils::_clear_list<T>(this->_head);
+        this->_head = SLLUtils::_copy_list<T>(RHS._head);
         this->_size = RHS._size;
         return *this;
     }
@@ -158,7 +158,7 @@ namespace DSA
     typename SLL<T>::Iterator SLL<T>::insert_head(T i)
     {
         this->_size++;
-        Iterator it(_insert_head<T>(this->_head, i));
+        Iterator it(SLLUtils::_insert_head<T>(this->_head, i));
         return it;
     }
 
@@ -166,7 +166,7 @@ namespace DSA
     typename SLL<T>::Iterator SLL<T>::insert_after(T i, typename SLL<T>::Iterator iMarker)
     {
         this->_size++;
-        Iterator it(_insert_after<T>(this->_head, iMarker._ptr, i));
+        Iterator it(SLLUtils::_insert_after<T>(this->_head, iMarker._ptr, i));
         return it;
     }
 
@@ -174,7 +174,7 @@ namespace DSA
     typename SLL<T>::Iterator SLL<T>::insert_before(T i, typename SLL<T>::Iterator iMarker)
     {
         this->_size++;
-        Iterator it(_insert_before<T>(this->_head, iMarker._ptr, i));
+        Iterator it(SLLUtils::_insert_before<T>(this->_head, iMarker._ptr, i));
         return it;
     }
 
@@ -182,32 +182,32 @@ namespace DSA
     T SLL<T>::Delete(typename SLL<T>::Iterator iMarker)
     {
         if (this->_size > 0) this->_size--;
-        return _delete_node<T>(this->_head, iMarker._ptr);
+        return SLLUtils::_delete_node<T>(this->_head, iMarker._ptr);
     }
 
     template <typename T>
     typename SLL<T>::Iterator SLL<T>::search(const T& key) const
     {
-        Iterator it(_search_list<T>(this->_head, key));
+        Iterator it(SLLUtils::_search_list<T>(this->_head, key));
         return it;
     }
 
     template <typename T>
     const T& SLL<T>::operator[](int index) const
     {
-        return _at<T>(this->_head, index);
+        return SLLUtils::_at<T>(this->_head, index);
     }
 
     template <typename T>
     T& SLL<T>::operator[](int index)
     {
-        return _at<T>(this->_head, index);
+        return SLLUtils::_at<T>(this->_head, index);
     }
 
     template <typename T>
     typename SLL<T>::Iterator SLL<T>::prev(typename SLL<T>::Iterator iMarker)
     {
-        Iterator it(_previous_node<T>(this->_head, iMarker._ptr));
+        Iterator it(SLLUtils::_previous_node<T>(this->_head, iMarker._ptr));
         return it;
     }
 
@@ -235,13 +235,13 @@ namespace DSA
     template <typename T>
     void SLL<T>::Print() const
     {
-        _print_list<T>(this->_head);
+        SLLUtils::_print_list<T>(this->_head);
     }
 
     template <typename T>
     void SLL<T>::PrintBackwards() const
     {
-        _print_list_backwards<T>(this->_head);
+        SLLUtils::_print_list_backwards<T>(this->_head);
     }
 
     template <typename U>
