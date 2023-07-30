@@ -68,6 +68,10 @@ if(BUILD_TESTS)
         _tests/_test_files/stackandqueue_test.cpp
         ${SOURCE_FILES}
     )
+    ADD_EXECUTABLE(avl_test
+        _tests/_test_files/avl_test.cpp
+        ${SOURCE_FILES}
+    )
     ADD_EXECUTABLE(main
         main.cpp
         ${SOURCE_FILES}
@@ -76,6 +80,7 @@ if(BUILD_TESTS)
     TARGET_LINK_LIBRARIES(vector_test gtest)
     TARGET_LINK_LIBRARIES(sll_test gtest)
     TARGET_LINK_LIBRARIES(stackandqueue_test gtest)
+    TARGET_LINK_LIBRARIES(avl_test gtest)
 endif()
 
 set(CMAKE_CXX_STANDARD 14)
