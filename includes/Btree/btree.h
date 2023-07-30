@@ -1,15 +1,12 @@
 #ifndef BTREE_H
 #define BTREE_H
 
-#include <cassert>  // Provides assert
-#include <cstdlib>  // Provides size_t
-#include <iomanip>  // Provides std::setw
-#include <iostream> // Provides std::cout
-#include <string>   // Provides std::to_string
-#ifdef _WIN32
-#include <windows.h>
-#endif
 #include "btree_array_functions.h" // Include the implementation.
+#include <cassert>                 // Provides assert
+#include <cstdlib>                 // Provides size_t
+#include <iomanip>                 // Provides std::setw
+#include <iostream>                // Provides std::cout
+#include <string>                  // Provides std::to_string
 
 namespace DSA
 {
@@ -280,11 +277,8 @@ namespace DSA
     template <class Item>
     void BTree<Item>::print(int indent, std::ostream& outs) const
     {
-#ifdef _WIN32
-        SetConsoleOutputCP(CP_UTF8);
-#endif
-        static const std::string down_bracket = "\357\271\207"; // ﹇
-        static const std::string up_bracket = "\357\271\210";   // ﹈
+        static const std::string down_bracket = "^"; // ﹇
+        static const std::string up_bracket = "v";   // ﹈
         if (this->child_count > this->data_count) this->subset[child_count - 1]->print(indent + 1, outs);
         outs << std::setw(indent * 4) << "" << down_bracket << std::endl;
         if (this->data_count != 0)

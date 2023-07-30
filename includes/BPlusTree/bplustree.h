@@ -1,16 +1,12 @@
 #ifndef BPLUSTREE_H
 #define BPLUSTREE_H
 
-#include <cassert>  // Provides assert
-#include <cstdlib>  // Provides size_t
-#include <iomanip>  // Provides std::setw
-#include <iostream> // Provides std::cout
-#include <string>   // Provides std::to_string
-#ifdef _WIN32
-#include <windows.h>
-#endif
-
 #include "bplustree_array_functions.h" // Include the implementation.
+#include <cassert>                     // Provides assert
+#include <cstdlib>                     // Provides size_t
+#include <iomanip>                     // Provides std::setw
+#include <iostream>                    // Provides std::cout
+#include <string>                      // Provides std::to_string
 
 namespace DSA
 {
@@ -291,11 +287,8 @@ namespace DSA
     template <class Item>
     void BPlusTree<Item>::print(int indent, std::ostream& outs) const
     {
-#ifdef _WIN32
-        SetConsoleOutputCP(CP_UTF8);
-#endif
-        static const std::string down_bracket = "\357\271\207"; // ﹇
-        static const std::string up_bracket = "\357\271\210";   // ﹈
+        static const std::string down_bracket = "^"; // ﹇
+        static const std::string up_bracket = "v";   // ﹈
         for (int i = this->data_count; i >= 0; --i)
         {
             if (i < this->data_count)
