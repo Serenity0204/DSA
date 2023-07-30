@@ -1,6 +1,6 @@
 
 # DSA
-Just Implementations of General Data Structures in generic form in C++
+Just Some Implementations of General Data Structures in C++ Generic Forms.
 
 
 ## Implemented Data Structures
