@@ -80,6 +80,14 @@ if(BUILD_TESTS)
         _tests/_test_files/priorityqueue_test.cpp
         ${SOURCE_FILES}
     )
+    ADD_EXECUTABLE(btree_test
+        _tests/_test_files/btree_test.cpp
+        ${SOURCE_FILES}
+    )
+    ADD_EXECUTABLE(bplustree_test
+        _tests/_test_files/bplustree_test.cpp
+        ${SOURCE_FILES}
+    )
     ADD_EXECUTABLE(main
         main.cpp
         ${SOURCE_FILES}
@@ -91,6 +99,8 @@ if(BUILD_TESTS)
     TARGET_LINK_LIBRARIES(avl_test gtest)
     TARGET_LINK_LIBRARIES(heap_test gtest)
     TARGET_LINK_LIBRARIES(priorityqueue_test gtest)
+    TARGET_LINK_LIBRARIES(btree_test gtest)
+    TARGET_LINK_LIBRARIES(bplustree_test gtest)
 endif()
 
 set(CMAKE_CXX_STANDARD 14)
