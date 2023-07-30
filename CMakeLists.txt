@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.14) # Because we are using FetchContent which is available in 3.14+
+cmake_minimum_required(VERSION 3.14 FATAL_ERROR) #FetchContent_MakeAvailable
 project(DSA)
 
 # # Globbing source files
@@ -42,19 +42,27 @@ endif()
 option(BUILD_TESTS "Build tests" OFF)
 
 if(BUILD_TESTS)
+
+    find_package(GTest QUIET)
+    if (NOT ${GTest_FOUND}) # GTest not found, FetchContent!
     include(FetchContent)
     FetchContent_Declare(
-      googletest
-      URL https://github.com/google/googletest/archive/609281088cfefc76f9d0ce82e1ff6c30cc3591e5.zip
-    )
-
-    set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+        googletest
+        GIT_REPOSITORY https://github.com/google/googletest.git
+        GIT_TAG        v1.13.0)
     FetchContent_MakeAvailable(googletest)
+    endif()
+    
+    # GoogleTest requires at least C++14
+    set(CMAKE_CXX_STANDARD 14)
+    set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-    enable_testing()
-
+    #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    #   Grab all cpp files from includes folder
+    #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     set(INCLUDES_FOLDER includes)
-    FILE(GLOB_RECURSE SOURCE_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${INCLUDES_FOLDER}/*.cpp")
+    FILE(GLOB_RECURSE SOURCE_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} CONFIGURE_DEPENDS "${INCLUDES_FOLDER}/*.cpp")
+    #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     ADD_EXECUTABLE(vector_test
         _tests/_test_files/vector_test.cpp
@@ -88,19 +96,24 @@ if(BUILD_TESTS)
         _tests/_test_files/bplustree_test.cpp
         ${SOURCE_FILES}
     )
+    ADD_EXECUTABLE(maps_test
+        _tests/_test_files/maps_test.cpp
+        ${SOURCE_FILES}
+    )
     ADD_EXECUTABLE(main
         main.cpp
         ${SOURCE_FILES}
     )
-    TARGET_LINK_LIBRARIES(main gtest)
-    TARGET_LINK_LIBRARIES(vector_test gtest)
-    TARGET_LINK_LIBRARIES(sll_test gtest)
-    TARGET_LINK_LIBRARIES(stackandqueue_test gtest)
-    TARGET_LINK_LIBRARIES(avl_test gtest)
-    TARGET_LINK_LIBRARIES(heap_test gtest)
-    TARGET_LINK_LIBRARIES(priorityqueue_test gtest)
-    TARGET_LINK_LIBRARIES(btree_test gtest)
-    TARGET_LINK_LIBRARIES(bplustree_test gtest)
+    TARGET_LINK_LIBRARIES(main GTest::gtest_main)
+    TARGET_LINK_LIBRARIES(vector_test GTest::gtest_main)
+    TARGET_LINK_LIBRARIES(sll_test GTest::gtest_main)
+    TARGET_LINK_LIBRARIES(stackandqueue_test GTest::gtest_main)
+    TARGET_LINK_LIBRARIES(avl_test GTest::gtest_main)
+    TARGET_LINK_LIBRARIES(heap_test GTest::gtest_main)
+    TARGET_LINK_LIBRARIES(priorityqueue_test GTest::gtest_main)
+    TARGET_LINK_LIBRARIES(btree_test GTest::gtest_main)
+    TARGET_LINK_LIBRARIES(bplustree_test GTest::gtest_main)
+    TARGET_LINK_LIBRARIES(maps_test GTest::gtest_main)
 endif()
 
 set(CMAKE_CXX_STANDARD 14)

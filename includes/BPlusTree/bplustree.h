@@ -156,7 +156,7 @@ namespace DSA
         // helper for get
         Item* get_helper(const Item& entry)
         {
-            size_t index = first_ge(this->data, this->data_count, entry);
+            size_t index = BPlusTreeUtils::first_ge(this->data, this->data_count, entry);
             bool found = (index < this->data_count) && !(entry < this->data[index]);
 
             // leaf and found
@@ -219,11 +219,6 @@ namespace DSA
         return count;
     }
     template <class Item>
-    std::size_t BPlusTree<Item>::size_list()
-    {
-        return 0;
-    }
-    template <class Item>
     std::size_t BPlusTree<Item>::count() const
     {
         size_t count_items = this->data_count;
@@ -246,7 +241,7 @@ namespace DSA
     void BPlusTree<Item>::copy_tree(const BPlusTree<Item>& source, BPlusTree<Item>*& last_node)
     {
         this->child_count = source.child_count;
-        copy_array(this->data, source.data, this->data_count, source.data_count);
+        BPlusTreeUtils::copy_array(this->data, source.data, this->data_count, source.data_count);
         this->next = nullptr;
         for (int i = 0; i < source.child_count; ++i)
         {
@@ -403,7 +398,7 @@ namespace DSA
     template <class Item>
     bool BPlusTree<Item>::contains(const Item& entry) const
     {
-        size_t index = first_ge(this->data, this->data_count, entry);
+        size_t index = BPlusTreeUtils::first_ge(this->data, this->data_count, entry);
         bool found = (index < this->data_count) && !(entry < this->data[index]);
 
         // leaf and found

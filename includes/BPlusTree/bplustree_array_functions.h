@@ -102,7 +102,7 @@ namespace BPlusTreeUtils
     std::size_t first_ge(const T data[], std::size_t n, const T& entry)
     {
         for (int i = 0; i < n; ++i)
-            if (data[i] >= entry)
+            if (!(data[i] < entry))
                 return i;
         return n;
     }
@@ -197,22 +197,21 @@ namespace BPlusTreeUtils
         // dest_size = src_size;
     }
 
-    // return true if item <= all data[i], otherwise return false
     template <class T>
     bool is_le(const T data[], std::size_t n, const T& item)
     {
-        for (size_t i = 0; i < n; ++i)
-            if (data[i] < item)
-                return false;
+        for (std::size_t i = 0; i < n; i++)
+            if (item > data[i]) return false;
+
         return true;
     }
 
-    // return true if item > all data[i], otherwise return false
     template <class T>
     bool is_gt(const T data[], std::size_t n, const T& item)
     {
-        for (size_t i = 0; i < n; ++i)
-            if (data[i] >= item) return false;
+        for (std::size_t i = 0; i < n; i++)
+            if (item <= data[i]) return false;
+
         return true;
     }
 
