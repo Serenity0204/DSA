@@ -6,7 +6,9 @@
 #include <iomanip>  // Provides std::setw
 #include <iostream> // Provides std::cout
 #include <string>   // Provides std::to_string
-
+#ifdef _WIN32
+#include <windows.h>
+#endif
 #include "btree_array_functions.h" // Include the implementation.
 
 namespace DSA
@@ -40,8 +42,6 @@ namespace DSA
         // OVERLOAD OPERATOR FUNCTIONS
         template <class U>
         friend std::ostream& operator<<(std::ostream& outs, const BTree<U>& btree);
-        // SUGGESTED FUNCTION FOR DEBUGGING
-        std::string in_order();
 
     private:
         // MEMBER CONSTANTS
@@ -280,6 +280,9 @@ namespace DSA
     template <class Item>
     void BTree<Item>::print(int indent, std::ostream& outs) const
     {
+#ifdef _WIN32
+        SetConsoleOutputCP(CP_UTF8);
+#endif
         static const std::string down_bracket = "\357\271\207"; // ﹇
         static const std::string up_bracket = "\357\271\210";   // ﹈
         if (this->child_count > this->data_count) this->subset[child_count - 1]->print(indent + 1, outs);

@@ -6,6 +6,9 @@
 #include <iomanip>  // Provides std::setw
 #include <iostream> // Provides std::cout
 #include <string>   // Provides std::to_string
+#ifdef _WIN32
+#include <windows.h>
+#endif
 
 #include "bplustree_array_functions.h" // Include the implementation.
 
@@ -129,10 +132,6 @@ namespace DSA
             btree.print(0, outs);
             return outs;
         }
-        // SUGGESTED FUNCTION FOR DEBUGGING
-        std::string in_order() { return ""; }
-        std::string pre_order() { return ""; }
-        std::string post_order() { return ""; }
 
     private:
         // MEMBER CONSTANTS
@@ -292,6 +291,9 @@ namespace DSA
     template <class Item>
     void BPlusTree<Item>::print(int indent, std::ostream& outs) const
     {
+#ifdef _WIN32
+        SetConsoleOutputCP(CP_UTF8);
+#endif
         static const std::string down_bracket = "\357\271\207"; // ﹇
         static const std::string up_bracket = "\357\271\210";   // ﹈
         for (int i = this->data_count; i >= 0; --i)

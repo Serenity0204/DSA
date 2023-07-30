@@ -1,5 +1,8 @@
 #ifndef DSA_H
 #define DSA_H
+
+// All DSA
+#include "AVL/avl.h"
 #include "BPlusTree/bplustree.h"
 #include "Btree/btree.h"
 #include "Heap/heap.h"
