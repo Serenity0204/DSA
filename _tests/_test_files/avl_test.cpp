@@ -23,7 +23,7 @@ bool isAVL(AVLUtils::binary_tree_node<Item>* root)
 
 bool test_avl_load1(bool debug = false)
 {
-    AVL<int> avl;
+    DSA::AVL<int> avl;
     for (int i = 0; i < 10000; ++i)
     {
         if (i % 2 == 0)
@@ -73,7 +73,7 @@ bool test_avl_load1(bool debug = false)
 
 bool test_avl_size1(bool debug = false)
 {
-    AVL<int> avl;
+    DSA::AVL<int> avl;
     for (int i = 0; i < 1000; ++i)
     {
         avl.insert(i);
@@ -104,7 +104,7 @@ bool test_avl_size2(bool debug = false)
 {
     int arr[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     int size = 10;
-    AVL<int> avl(arr, size);
+    DSA::AVL<int> avl(arr, size);
     if (debug)
     {
         cout << avl << endl;
