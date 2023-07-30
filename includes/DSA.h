@@ -7,6 +7,8 @@
 #include "Btree/btree.h"
 #include "Heap/heap.h"
 #include "Heap/pqueue.h"
+#include "Map/map.h"
+#include "Map/mmap.h"
 #include "SLL/sll.h"
 #include "StackAndQueue/queue.h"
 #include "StackAndQueue/stack.h"

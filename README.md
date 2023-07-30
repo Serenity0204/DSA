@@ -13,6 +13,8 @@ Just Implementations of General Data Structures in generic form in C++
 * AVL Tree
 * B Tree
 * B+ Tree
+* Map
+* MultiMap
 
 
 ## Design
