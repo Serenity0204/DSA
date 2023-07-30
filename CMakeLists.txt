@@ -72,6 +72,14 @@ if(BUILD_TESTS)
         _tests/_test_files/avl_test.cpp
         ${SOURCE_FILES}
     )
+    ADD_EXECUTABLE(heap_test
+        _tests/_test_files/heap_test.cpp
+        ${SOURCE_FILES}
+    )
+    ADD_EXECUTABLE(priorityqueue_test
+        _tests/_test_files/priorityqueue_test.cpp
+        ${SOURCE_FILES}
+    )
     ADD_EXECUTABLE(main
         main.cpp
         ${SOURCE_FILES}
@@ -81,6 +89,8 @@ if(BUILD_TESTS)
     TARGET_LINK_LIBRARIES(sll_test gtest)
     TARGET_LINK_LIBRARIES(stackandqueue_test gtest)
     TARGET_LINK_LIBRARIES(avl_test gtest)
+    TARGET_LINK_LIBRARIES(heap_test gtest)
+    TARGET_LINK_LIBRARIES(priorityqueue_test gtest)
 endif()
 
 set(CMAKE_CXX_STANDARD 14)
