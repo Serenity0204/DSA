@@ -159,7 +159,7 @@ namespace DSA
     template <typename K, typename V>
     void Map<K, V>::insert(const K& k, const V& v)
     {
-        this->map.insert(MapUtils::Pair<K, V>(k, v));
+        this->at(key) = v;
     }
 
     template <typename K, typename V>
